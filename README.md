@@ -6,9 +6,9 @@ Generate a Wikipedia-like page on a topic using AI.
 <img width="1470" alt="Screenshot 2025-03-16 at 3 01 24 PM" src="https://github.com/user-attachments/assets/07fb7027-0fd5-4bd5-9ce9-cf3e0d74c15e" />
 
 
-# Wiki AI Backend Server
+# Wiki AI Backend Server `/server`
 
-This handles LLM requests and image fetching, acting as a proxy between the frontend and various external APIs.
+Handles LLM requests and image fetching, acting as a proxy between the frontend and various external APIs.
 
 ## Hosting Setup
 
@@ -50,7 +50,7 @@ The server will be available at `http://localhost:1212`.
 - POST `/api/expand-sentence` - Expand a sentence into a detailed paragraph
 
 
-# Client
+# Client `/client`
 
 This is the client application.
 
