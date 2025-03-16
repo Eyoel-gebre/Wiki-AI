@@ -1,0 +1,1284 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.4;
+  color: #333;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+h3, h2 {
+  font-weight: 550;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Header Styles */
+.app-header {
+  padding-top: 1rem;
+  width: 100%;
+  height: 7rem;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.app-title {
+  cursor: pointer;
+  padding: 0.1rem .75rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  text-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+}
+
+.app-title:hover {
+  color: #666;
+  background-color: #e9ecef;
+}
+
+/* Input Styles */
+.topic-input {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+
+
+/* Layout */
+main {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  padding: 2rem;
+  height: calc(100vh - 150px);
+  /* overflow: hidden; */
+}
+
+/* Sidebar specific styles */
+.toc-container.sidebar {
+  flex: 0 0 20%;
+  max-width: 17%;
+  padding: 0 0;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  position: sticky;
+  top: 3vh;
+  height: 97vh;
+  margin-top: -20vh;
+}
+
+.table-of-contents {
+  background-color: white;
+  padding: 1.25rem 0;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Topic Styles */
+.topic {
+  display: block;
+  text-decoration: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+}
+
+.topic:hover {
+  text-decoration: none;
+  /* background-color: #f8f9fa; */
+}
+
+/* Remove pointer cursor from individual elements */
+.topic-header {
+  cursor: inherit;
+  display: flex;
+}
+
+.subtopic {
+  cursor: inherit;
+  font-size: 0.8rem;
+  padding-left: .25rem;
+}
+
+/* Keep the Wikipedia-style link color for the main topic title */
+.topic-header h3 {
+  /* margin: .2rem .25rem; */
+  margin: .15em 0;
+  margin-left: .25rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  /* cursor: pointer; */
+  background-color: transparent;
+}
+
+/* .topic-header:hover {
+  background-color: transparent;
+  text-decoration: underline;
+} */
+
+.topic-content {
+  padding: 0.15rem 0 0.15rem .5rem;
+  border-top: none;
+}
+
+/* Style subtopics as ordered list */
+.subtopics {
+  margin: 0;
+  padding-left: 1rem;
+  list-style-type: none;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes smoothFadeInfromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subtopic {
+  /* margin-bottom: 0.15rem; */
+  animation: smoothFadeInfromTop 0.2s ease-in-out backwards;
+}
+
+/* .subtopic:hover {
+  text-decoration: underline;
+} */
+
+/* Add bullet points for main topics */
+.topic-header::before {
+  content: none;
+}
+
+/* Style the expand/collapse icon */
+.expand-icon {
+  font-size: 0.8rem;
+  color: #777;
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease-out;
+}
+
+/* Study Content */
+.study-content {
+  flex: 0 0 80%;
+  background: white;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  /* overflow-y: auto; */
+  animation: fadeIn 0.3s ease-in-out forwards;
+  min-width: 100%;
+}
+
+.study-section {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.study-section-content {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.study-text-content {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.study-images {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 20px;
+}
+
+.study-image {
+  margin: 0;
+}
+
+.study-image img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  /* border-radius: 4px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Common caption styles for both inline and sidebar images */
+.study-image figcaption,
+.study-image-inline figcaption {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.study-button, .exit-study-button {
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.study-button {
+  background-color: black;
+  margin-top: 1rem;
+}
+
+.exit-study-button {
+  background-color: black;
+}
+
+.study-button:hover { background-color: #474747; }
+.exit-study-button:hover { background-color: #444; }
+
+.study-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Loading States */
+.loader, .subtopic-loading {
+  color: #666;
+  text-align: center;
+}
+
+.loading-dots::after {
+  content: '...';
+  animation: dots .75s steps(4, end) infinite;
+  text-align: center;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Markdown Content Styling */
+.study-text-content h2 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.study-text-content h3 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.study-text-content ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 2rem;
+}
+
+.study-text-content li {
+  margin-bottom: 0.25rem;
+}
+
+.study-text-content p {
+  margin-bottom: 1rem;
+}
+
+.study-text-content a {
+  color: #0066cc;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.study-text-content a:hover {
+  border-bottom-color: #0066cc;
+}
+
+/* Model Selector */
+.model-selector {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.model-selector optgroup {
+  font-weight: 600;
+}
+
+.model-selector option {
+  padding: 0.25rem;
+}
+
+.title-container {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  color: #222;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-size: 1.75rem;
+  margin: 1.25rem 0;
+}
+
+h3 {
+  font-size: 1.4rem;
+  /* margin: 1rem 0; */
+}
+
+.study-button:disabled:hover {
+  background-color: #999;
+}
+
+.toc-container.sidebar h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.study-section h3 {
+  color: #222;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.study-content-text {
+  line-height: 1.5;
+  color: #444;
+  white-space: pre-wrap;
+  animation: typing 0.1s ease-out;
+}
+
+@keyframes typing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.topic-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.subtopic-loading {
+  color: #666;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+.study-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 1.5rem; */
+  font-size: 2rem;
+}
+
+.study-mode.app {
+  width: 100%;
+}
+
+/* Adjust sidebar content when in expanded mode */
+.toc-container.sidebar .table-of-contents {
+  padding: 0 .75rem;
+}
+
+.toc-container.sidebar .topic-input {
+  margin-bottom: 1rem;
+}
+
+.table-of-contents h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.study-mode {
+  max-width: 100%;
+  top: 0;
+  position: relative;
+  height: auto;
+  padding-top: 0;
+  margin-left: .5rem;
+  padding: 0;
+}
+
+/* Main title "Wiki ai" */
+h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  margin-top: 0;
+}
+
+/* Section titles like "Definition of Dog Breeds" */
+h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* Subsection titles like "1a. Definition of Dog Breeds" */
+h3 {
+  font-size: 1.4rem;
+}
+
+/* Regular paragraph text */
+p {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0.5rem 0;
+}
+
+/* Table of contents links */
+.toc-link {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.topic-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Search input text */
+.topic-input-field {
+  font-size: 1rem;
+  padding: 0;
+  max-height: 1.5rem;
+  max-width: 50%;
+  /* margin-left: auto;
+  margin-right: auto; */
+  padding: 0.25rem .5rem;
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: .5px solid #999999;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  height: 3rem;
+  outline: none;
+  box-shadow: 0px 10px 14px 0px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.topic-input-field:hover {
+  /* border-color: #000000; */
+  box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.topic-input-button {
+  /* padding: 0 1.25rem; */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  height: 2.5rem;
+  white-space: nowrap;
+  box-shadow: 0px 9px 7px rgba(0, 0, 0, 0.1);
+}
+
+.topic-input-button:hover {
+  background-color: #3c3c3c;
+}
+
+/* Exit button */
+.exit-button {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Add styles for active topic */
+/* .topic.active .topic-header h3 {
+  font-weight: 500;
+  color: #0645AD;
+} */
+
+/* @keyframes increaseHeightSmoothly {
+  from {
+    max-height: 0.95rem;
+  }
+  to {
+    max-height: 100%;
+  }
+} */
+
+.toc-title {
+  font-size: 1rem;
+  padding: 0.8rem 0;
+  margin: 0;
+  height: auto;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+}
+
+/* View History Styles */
+.view-history {
+  padding: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  width: 100%;
+}
+
+.history-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+.history-card {
+  flex: 0 0 calc(25% - 0.75rem); /* 4 cards per row with gap consideration */
+  /* min-width: 200px; Minimum card width */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .history-card {
+    flex: 0 0 calc(33.333% - 0.67rem); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 900px) {
+  .history-card {
+    flex: 0 0 calc(50% - 0.5rem); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .history-card {
+    flex: 0 0 100%; /* 1 card per row */
+  }
+}
+
+/* Keep existing styles for card internals */
+.history-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.history-card:hover .history-card-image img {
+  transform: scale(1.05);
+}
+
+.history-card-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  background-color: #e0e0e0;
+}
+
+.history-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.view-history .topic-name {
+  font-weight: 500;
+  display: block;
+  word-wrap: break-word;
+  padding: 1rem;
+  background-color: #f5f5f5;
+}
+
+.view-history h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Add these to the View History Styles section */
+.view-history-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.clear-history-button {
+  padding: 0.5rem 1rem;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  float: right;
+}
+
+.clear-history-button:hover {
+  background-color: #414141;
+}
+
+/* Remove the inline image styles since we're not using them anymore */
+.study-image-inline {
+  display: none;
+}
+
+/* Add hover effect for paragraphs in study content */
+.study-content-text p {
+  transition: font-weight 0.2s ease, background-color 0.2s ease;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+/* Paragraph container styling */
+.paragraph-container {
+  position: relative;
+}
+
+/* Input field that appears on hover */
+.paragraph-input-container {
+  margin: 0.5rem;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.2s ease, height 0.2s ease;
+}
+
+.paragraph-input-container.visible {
+  opacity: 1;
+  height: 38px; /* Height of input + padding */
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.paragraph-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 60%;
+  justify-content: center;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+
+.paragraph-input {
+  height: 1.2rem;
+  font-size: 1rem;
+  background-color: #ffffff;
+  border-radius: 40px;
+  border: .5px solid #999999;
+  transition: border-color 0.2s ease;
+  max-height: 1.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.25rem .5rem;
+  flex: 1;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.paragraph-input-button {
+  background-color: #000000fa;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+/* 
+.paragraph-input:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+} */
+
+/* Ensure the hover effect works with the new structure */
+.paragraph-container p {
+  transition: font-weight 0.2s ease, background-color 0.2s ease;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+.paragraph-text.hovered {
+  /* font-weight: 500; */
+  background-color: rgba(0, 0, 0, 0.048);
+}
+
+/* Answer styling */
+.paragraph-answer {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #f5f7fa;
+  border-left: 3px solid #0066cc;
+  border-radius: 0 4px 4px 0;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.answer-loading {
+  color: #666;
+  font-style: italic;
+}
+
+.answer-content {
+  line-height: 1.5;
+}
+
+.answer-question {
+  font-weight: 500;
+  color: #0066cc;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.answer-text {
+  font-size: 0.95rem;
+  color: #333;
+  padding-left: 1.2rem; /* Indent the answer text */
+} 
+
+.first-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.title-container {
+  margin: 0 auto;
+}
+
+.model-selector-container {
+  position: absolute;
+  right: 0;
+  margin: .5rem;
+}
+
+.qa-selector-container {
+  position: absolute;
+  right: 13rem;
+}
+
+.expand-selector-container {
+  position: absolute;
+  right: 16rem;
+}
+
+.sentence:hover {
+  background-color: #0000001f;
+  /* font-weight: 500; */
+  font-style: italic;
+  cursor: pointer;
+}
+
+/* Tooltip styles for expandable sentences */
+.sentence {
+  position: relative;
+}
+
+.sentence:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.2s ease-in-out forwards;
+  animation-delay: 0.2s;
+}
+
+.sentence:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.2s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* Ensure the tooltip doesn't appear for sentences that aren't expandable */
+.sentence:not([data-tooltip]):hover::after,
+.sentence:not([data-tooltip]):hover::before {
+  display: none;
+}
+
+.topic-header.active {
+  background-color: #0000000d;
+  border-left: 3px solid #0066cc;
+  /* border-radius: 3px; */
+}
+
+.subtopic.active {
+  background-color: #0000000d;
+  border-left: 3px solid #0066cc;
+  /* border-radius: 3px; */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .paragraph-input-wrapper {
+    width: 90%;
+  }
+
+  .topic-input-container {
+    width: 90%;
+    margin: auto;
+  }
+
+  /* Header adjustments */
+  .first-row {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  .title-container {
+    margin-bottom: 1rem;
+  }
+
+  /* Input field adjustments */
+  .topic-input {
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 2rem;
+  }
+
+  .topic-input-field {
+    font-size: 1rem;
+    padding-left: 20px;
+    max-height: 2rem;
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  /* Layout adjustments */
+  .app {
+    flex-direction: column;
+  }
+
+  .study-mode {
+    width: 95%;
+    margin: auto;
+  }
+
+  main {
+    padding: 1rem;
+    height: auto;
+    flex-direction: column;
+  }
+
+  /* Sidebar adjustments */
+  .toc-container.sidebar {
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+    margin-top: 0;
+    position: relative;
+    overflow-y: visible;
+  }
+
+  /* Study content adjustments */
+  .study-content {
+    min-width: 100%;
+    padding: 0;
+  }
+
+  .study-section-content {
+    flex-direction: column;
+  }
+
+  .study-images {
+    flex: 1;
+    position: static;
+  }
+
+  /* View history adjustments */
+  .view-history {
+    padding: 1rem;
+    margin-top: 2.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+  }
+  
+  .history-grid {
+    gap: 1rem;
+  }
+  
+  .history-card {
+    flex: 0 0 calc(50% - 0.5rem); /* 2 cards per row on tablets */
+    min-width: 150px;
+  }
+  
+  .view-history-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .clear-history-button {
+    margin-top: 0.5rem;
+  }
+
+  .history-card {
+    max-width: 170px; /* Two columns */
+    margin: 0.125rem; /* Small margins between cards */
+    display: inline-block;
+    vertical-align: top;
+  }
+
+}
+
+/* Mobile Sidebar Styles */
+.mobile-sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 35px;
+  height: 35px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: .5px solid #999999;
+  border-radius: 50%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-sidebar-toggle:hover {
+  background-color: #3c3c3c;
+  color: rgb(255, 255, 255);
+}
+
+.mobile-sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 100vh;
+  background-color: white;
+  z-index: 1001;
+  /* box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); */
+  border-right: 1px solid #eee;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.mobile-sidebar.open {
+  transform: translateX(0);
+}
+
+.mobile-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-sidebar-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.mobile-sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.mobile-sidebar-overlay.open {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .mobile-sidebar-toggle {
+    display: flex;
+  }
+  
+  .mobile-sidebar,
+  .mobile-sidebar-overlay {
+    display: block;
+  }
+  
+  /* Hide the model selector, qa selector, and expand selector in the header */
+  .model-selector-container,
+  .qa-selector-container,
+  .expand-selector-container {
+    display: none;
+  }
+  
+  /* Make the study content take full width */
+  .study-content {
+    width: 100%;
+  }
+}
+
+/* Mobile Table of Contents */
+.mobile-toc {
+  display: none;
+  width: 90%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  /* background-color: #f9f9f9;
+  border: 1px solid #eee; */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mobile-toc-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mobile-toc-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out;
+  background-color: white;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 0;
+  opacity: 0;
+}
+
+.mobile-toc-content.open {
+  max-height: 1000px; /* Use a much larger value to ensure all content fits */
+  overflow-y: auto;
+  border-bottom: 1px solid #eee;
+  padding: 1rem;
+  opacity: 1;
+  transition: max-height 0.5s ease-in-out, padding 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Ensure the table of contents is properly displayed in mobile view */
+.mobile-toc .table-of-contents {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Make sure topics are visible */
+.mobile-toc .topics-list {
+  display: block !important;
+  margin-top: 0.5rem;
+}
+
+.mobile-toc .topic {
+  margin-bottom: 0.5rem;
+}
+
+/* Ensure topic headers and subtopics are visible and properly styled */
+.mobile-toc .topic-header {
+  display: flex !important;
+  padding: 0.5rem 0;
+  margin: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-toc .subtopic {
+  display: block !important;
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Fix any potential z-index issues */
+.mobile-toc {
+  position: relative;
+  z-index: 100;
+}
+
+/* Make sure the toggle indicator is visible and properly positioned */
+.mobile-toc-toggle {
+  display: inline-block;
+  font-size: .8rem;
+  transition: transform 0.3s ease;
+  margin-left: 0.5rem;
+}
+
+.mobile-toc-toggle.open {
+  transform: rotate(180deg);
+}
+
+/* Update mobile media queries */
+@media (max-width: 768px) {
+  /* Show mobile TOC and hide desktop TOC */
+  .mobile-toc {
+    display: block;
+  }
+  
+  .toc-container.sidebar:not(.mobile-toc) {
+    display: none;
+  }
+  
+  /* Keep the sidebar for controls only */
+  .mobile-sidebar {
+    width: 70%;
+  }
+  
+  .mobile-sidebar .toc-container {
+    display: none;
+  }
+  
+  /* Adjust study content to take full width */
+  .study-content {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  /* Make sure the main content takes full width */
+  main {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+/* Hide the "Contents" title in mobile TOC since we already have it in the header */
+.mobile-toc .toc-title {
+  display: none;
+}
+
+/* Make sure the topics list starts at the top without the title */
+.mobile-toc .topics-list {
+  margin-top: 0;
+}
+
+/* Adjust spacing in mobile TOC */
+.mobile-toc .table-of-contents {
+  padding-top: 0;
+}
+
+/* Make sure the mobile TOC content has proper padding */
+.mobile-toc-content.open {
+  padding: 0.5rem 1rem;
+}
