@@ -23,7 +23,7 @@ function TopicInput({ onSubmit, disabled, initialValue = '' }) {
           type="text"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          placeholder="Enter a topic (e.g., 'History of France')"
+          placeholder="Enter a topic (e.g., 'Punic Wars')"
           // disabled={disabled}
         />
         <button className="topic-input-button" type="submit" disabled={disabled || !topic.trim()}>

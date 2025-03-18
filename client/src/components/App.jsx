@@ -508,7 +508,7 @@ function AppContent() {
       />
       
       {/* Mobile Table of Contents (collapsible) */}
-      {subject && (
+      {/* {subject && (
         <div className="mobile-toc">
           <div className="mobile-toc-header" onClick={toggleToc}>
             <h3>Contents</h3>
@@ -536,25 +536,27 @@ function AppContent() {
             />
           </div>
         </div>
-      )}
+      )} */}
       
       {!subject && !studyMode && (
         <ViewHistory onTopicClick={handleTopicSubmit} />
       )}
       
       {/* Mobile Sidebar Toggle Button */}
-      <button 
-        className="mobile-sidebar-toggle" 
-        onClick={toggleSidebar}
-        aria-label="Toggle sidebar"
-      >
-        ☰
-      </button>
+      {subject && (
+        <button 
+          className="mobile-sidebar-toggle" 
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
+        >
+          ☰
+        </button>
+      )}
       
       {/* Mobile Sidebar */}
       <div className={`mobile-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="mobile-sidebar-header">
-          <h3>Configuration</h3>
+          <h3>Contents</h3>
           <button 
             className="mobile-sidebar-close" 
             onClick={closeSidebar}
@@ -563,22 +565,67 @@ function AppContent() {
             ×
           </button>
         </div>
+
+        <TableOfContents
+          loading={loading}
+          title={title}
+          topics={topics}
+          expandedTopics={expandedTopics}
+          onTopicToggle={handleTopicToggle}
+          onStudyClick={(topic, index) => {
+            handleStudyClick(topic, index);
+            setTocExpanded(false); // Close TOC after selection
+          }}
+          isComplete={isComplete}
+          studyMode={studyMode}
+          studyLoading={studyLoading}
+          activeTopic={activeTopic}
+          activeSubtopic={activeSubtopic}
+          mobileToc={true}
+        />
+
+        {/* {subject && (
+          <div className="mobile-toc">
+            <div className="mobile-toc-header" onClick={toggleToc}>
+              <h3>Contents</h3>
+              <span className={`mobile-toc-toggle ${tocExpanded ? 'open' : ''}`}>
+                ▼
+              </span>
+            </div>
+            <div className={`mobile-toc-content ${tocExpanded ? 'open' : ''}`}> */}
+              {/* <TableOfContents
+                loading={loading}
+                title={title}
+                topics={topics}
+                expandedTopics={expandedTopics}
+                onTopicToggle={handleTopicToggle}
+                onStudyClick={(topic, index) => {
+                  handleStudyClick(topic, index);
+                  setTocExpanded(false); // Close TOC after selection
+                }}
+                isComplete={isComplete}
+                studyMode={studyMode}
+                studyLoading={studyLoading}
+                activeTopic={activeTopic}
+                activeSubtopic={activeSubtopic}
+                mobileToc={true}
+              /> */}
+            {/* </div>
+          </div>
+        )} */}
         
-        <div className="mobile-sidebar-controls">
-          {/* Model Selector */}
+        {/* <div className="mobile-sidebar-controls">
           <div className="mobile-sidebar-control">
             <label htmlFor="mobile-model-selector">Model:</label>
             <select 
               id="mobile-model-selector" 
               className="model-selector"
-              // Add your model selection logic here
             >
               <option value="gpt-3.5-turbo">GPT-3.5</option>
               <option value="gpt-4">GPT-4</option>
             </select>
           </div>
           
-          {/* QA Toggle */}
           <div className="mobile-sidebar-control">
             <label htmlFor="mobile-qa-toggle">Q&A Mode:</label>
             <input
@@ -589,7 +636,6 @@ function AppContent() {
             />
           </div>
           
-          {/* Expand Toggle */}
           <div className="mobile-sidebar-control">
             <label htmlFor="mobile-expand-toggle">Expand Mode:</label>
             <input
@@ -599,7 +645,7 @@ function AppContent() {
               onChange={(e) => setExpandEnabled(e.target.checked)}
             />
           </div>
-        </div>
+        </div> */}
       </div>
       
       {/* Original Table of Contents (hidden on mobile) */}
